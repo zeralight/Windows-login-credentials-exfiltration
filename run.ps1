@@ -40,4 +40,4 @@ echo "PASSWORD APRES SUBSTRING = $password"
 echo $null > "$HOME/Desktop/$password"
 # Cleaning
 cd $repo_path/..
-#rm -rf $repo_path > $null 2>&1 
+rm -rf $repo_path > $null 2>&1 
