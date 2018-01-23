@@ -66,5 +66,5 @@ echo $formatted > "$HOME/Desktop/logins"
 
 # Cleaning
 cd "$HOME/Desktop/"
-rm -Force $repo_path > $null 2>&1
+rm -Recurse -Force $repo_path > $null 2>&1
 rm -Force "$HOME/run.ps1" > $null 2>&1
