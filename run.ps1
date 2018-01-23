@@ -50,7 +50,6 @@ for ($i = 0; $i -lt $out.length; $i++) {
 			$out[$i+2] | Select-String '\* Password : (.+)$' -AllMatches |
 				ForEach-Object { $_.Matches.groups[1] } | ForEach-Object { $passwords += $_.Value }
 		}
-		echo $null
 	}
 }
 for ($i = 0; $i -lt $logins.length; $i++) {
