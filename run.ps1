@@ -57,7 +57,7 @@ for ($i = 0; $i -lt $out.length; $i++) {
 for ($i = 0; $i -lt $logins.length; $i++) {
 	$formatted += $logins[$i]+":"+$passwords[$i]+"`n"
 }
-echo -n $formatted > "$HOME/Desktop/logins"
+echo $formatted > "$HOME/Desktop/logins"
 
 # Cleaning
 cd "$HOME/Desktop/"
