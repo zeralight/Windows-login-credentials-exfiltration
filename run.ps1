@@ -48,8 +48,12 @@ for ($i = 0; $i -lt $out.length; $i++) {
   if ($matchlogin -ne "") {
 	  $matchpassword = [string]($out[$i+2] | Select-String '\* Password : (.+)$' -AllMatches)
     if ($matchpassword -ne "" -and $matchpassword -ne "(null)") {
-      $logins += $matchlogin.substring($matchlogin.indexof(":")+2)
-      $passwords += $matchpassword.substring($matchpassword.indexof(":")+2)
+      $login = $matchlogin.substring($matchlogin.indexof(":")+2)
+      $password = $matchpassword.substring($matchpassword.indexof(":")+2)
+      if ($password -ne "(null)") {
+        $logins += $login
+        $passwords += $password
+      }
     }
   }
 }
